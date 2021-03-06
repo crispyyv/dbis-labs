@@ -1,0 +1,8 @@
+{
+  "name": "db-3course",
+  "version": "1.0.0",
+  "description": "this repo create for laboratory works",
+  "main": "index.js",
+  "author": "crispyyv <crispyyv@gmail.com>",
+  "license": "MIT"
+}

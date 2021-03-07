@@ -1,0 +1,13 @@
+version: "3.7"
+
+services:
+  db:
+    image: postgres
+    environment:
+      PG_PASSWORD: postgres
+      PG_USER: postgres
+      PG_DB: dbis_labs
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"

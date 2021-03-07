@@ -5,3 +5,5 @@
 ```
 Technology stack: NodeJS + PostgreSQL + node-postgres
 ```
+
+> **1 laboratory**

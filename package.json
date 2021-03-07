@@ -1,0 +1,17 @@
+{
+  "name": "db-3course",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "repository": "https://github.com/crispyyv/dbis-labs.git",
+  "author": "crispyyv <lamer079@gmail.com>",
+  "scripts": {
+    "start": "tsc && node dist/app.js"
+  },
+  "devDependencies": {
+    "typescript": "^4.2.3"
+  },
+  "dependencies": {
+    "tslint": "^6.1.3"
+  },
+  "license": "MIT"
+}

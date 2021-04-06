@@ -1,13 +1,32 @@
-version: "3.7"
+version: "3.9"
 
 services:
-  db:
-    image: postgres
-    environment:
-      PG_PASSWORD: postgres
-      PG_USER: postgres
-      PG_DB: dbis_labs
+  postgres:
+    image: library/postgres:13-alpine
     volumes:
-      - ./pgdata:/var/lib/postgresql/data
+      - postgres:/var/lib/postgresql/data
+    networks:
+      - main
+    environment:
+      POSTGRES_PASSWORD: "admin"
+      POSTGRES_USER: "admin"
+      POSTGRES_DB: "main"
     ports:
-      - "5432:5432"
+    - 5432:5432
+  main:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    networks:
+      - main
+    depends_on:
+      - postgres
+    volumes:
+    - ./data/:/main/data
+
+
+volumes:
+  postgres:
+
+networks:
+  main:

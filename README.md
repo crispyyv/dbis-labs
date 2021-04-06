@@ -1,9 +1,10 @@
-# This repo will be contain all laboratory on dbis.
-
-> Each laboratory is a new branch.
-
-```
-Technology stack: NodeJS + PostgreSQL + node-postgres
-```
-
-> **1 laboratory**
+# vlad_task_1_fixed
+# Требования:
+#### 1) Установленный docker
+#### 2) Установленный docker-compose
+#### 3) Файлы Odata2020File.csv и Odata2019File.csv в папке data/
+# Запуск проект
+### make run
+# Результаты выполнения программы
+### Время выполнения data/logs.txt
+### Ответ на вопрос data/result.csv

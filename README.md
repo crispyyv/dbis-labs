@@ -1,4 +1,4 @@
-# vlad_task_1_fixed
+# Task_1
 # Требования:
 #### 1) Установленный docker
 #### 2) Установленный docker-compose

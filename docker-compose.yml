@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:13-alpine
+    environment:
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=main
+    volumes:
+    - main:/var/lib/postgresql/data
+    networks:
+      - main
+    ports:
+      - 5432:5432
+  flyway:
+    image: flyway/flyway
+    command: migrate
+    volumes:
+    - ./sql:/flyway/sql
+    - ./config:/flyway/conf
+    depends_on:
+      - postgres
+    networks:
+      - main
+    restart: on-failure
+
+networks:
+  main:
+
+
+volumes:
+  main:
+    external: true

@@ -1,11 +1,13 @@
-import time
 import csv
+import time
 import traceback
-from dotenv import dotenv_values
-from database import get_connection
 
+from dotenv import dotenv_values
+
+from database import get_connection
 from init import init
-from service import generate_insert_statement, process, answer_question, save_state, get_last_error
+from service import (answer_question, generate_insert_statement,
+                     get_last_error, process, save_state)
 
 
 def main():

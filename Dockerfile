@@ -6,10 +6,8 @@ COPY ./ ./
 
 RUN apk add py3-pip
 
-RUN apk update
-
-RUN apk add postgresql-dev gcc python3-dev musl-dev
+RUN apk add alpine-sdk
 
 RUN pip3 install -r requirements.txt
 
-CMD python3 main.py
+CMD uvicorn app:app --reload --host 0.0.0.0

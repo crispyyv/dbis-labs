@@ -1,31 +1,36 @@
 version: "3.9"
 
 services:
-  mongo:
-    image: mongo
-    volumes:
-      - mongo:/data/db
-    networks:
-      - main
-    environment:
-      MONGO_INITDB_DATABASE: "main"
-    ports:
-    - 27017:27017
   main:
-    build:
-      dockerfile: Dockerfile
-      context: .
     networks:
       - main
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+    - 8999:8000
     depends_on:
-      - mongo
+      - postgres
+      - redis
+    restart: on-failure
+  postgres:
+    image: postgres:13-alpine
+    networks:
+      - main
     volumes:
-    - ./data/:/main/data
-
-
-volumes:
-  mongo:
-    external: true
+    - vlad_postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=nft_user
+      - POSTGRES_PASSWORD=nft_password
+      - POSTGRES_DB=nft_database
+  redis:
+    image: redis
+    networks:
+      - main
 
 networks:
   main:
+    external: true
+
+volumes:
+  vlad_postgres:

@@ -1,40 +1,15 @@
-import csv
+from uuid import uuid4
+from database.models import User
 
 
-def process(row):
-    for key in row:
-        row[key] = row[key].replace(',', '.')
-        if row[key] == 'null':
-            row[key] = None
+async def get_database_user_from_cookie(redis, user_cookie):
+    user_id = await redis.get(user_cookie)
+    if user_id is None:
+        return None
+    user = await User.filter(id=user_id).get_or_none()
+    return user
 
 
-def answer_question(file_obj, client):
-    max_ball = client.main.aggregate(
-            [
-                {"$match": {'UkrTestStatus': 'зараховано'}},
-                {"$group": {"_id": "$TestYear", "maximum": {"$max": "$PHYSBALL100"}}},
-            ]
-    )
-    writer = csv.DictWriter(file_obj, fieldnames=["_id", "maximum"])
-    writer.writeheader()
-    for data in max_ball:
-        writer.writerow(data)
-
-
-def save_state(value, type, client):
-    client['metadata'].update({'type': type}, {'type': type, 'value': value}, upsert=True)
-
-
-
-def get_last_error(client):
-    metadata = client['metadata']
-    try:
-        last_row = int(metadata.find_one({'type': 'last_row'})['value'])
-    except:
-        last_row = 0
-    try:
-        path = metadata.find_one({'type': 'path'})['value']
-    except:
-        path = None
-    return path, last_row
-
+async def get_database_user_from_credentials(nickname, password):
+    user = await User.filter(nickname=nickname, password=password).get_or_none()
+    return user

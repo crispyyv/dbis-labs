@@ -22,7 +22,7 @@ from handlers.handle_create_user import handle_create_user
 from service import  get_database_user_from_credentials, get_database_user_from_cookie
 
 app = FastAPI(
-    description='Vlad Task 3',
+    description='Task 3',
     version='1',
     default_response_class=UJSONResponse
 )
